@@ -97,3 +97,9 @@ https://dlcdn.apache.org/maven/maven-3/3.9.12/binaries/apache-maven-3.9.12-bin.t
 usermod -aG root ec2-user
 [root@y22acs578-tomcat ~]# chmod -R g+w /opt/tomcat/webapps/
 
+FROM tomcat:latest
+RUN cp -R /usr/local/tomcat/webapps.dist/* /usr/local/tomcat/webapps/
+COPY registration-form.war /usr/local/tomcat/webapps/
+
+docker build -t tomcat .
+docker run -d --name tomcat-container -p 8081:8080 tomcat
